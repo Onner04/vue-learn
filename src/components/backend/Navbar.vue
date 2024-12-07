@@ -1,20 +1,58 @@
 <script >
     import axios from '@/config/axios.js'
     import csrf from '@/config/csrf'
-    import store from '@/store'
+    import { useStore , mapGetters } from 'vuex';
+    // import navBar from '@/lang/vn/navBar.js'
+  
+    export default {
+        data() {
+            return {
+                navBarData : null ,
+                showSubModule : false ,
+                user:null ,
+            }
+        }, 
+        mounted(){
+            this.getNavBarData()
+            this.getAdmin()
+        },
+        
+        methods: {
+            async getNavBarData(){
+                 try {
+                    await csrf.getCookie()
+                    const token = localStorage.getItem('token')
+                    const response = await axios.get('/dashbroad/getModule')
+                    this.navBarData = response.data      
+                }catch(error){
+                    console.log(error)
+                }               
+            },
+            async getAdmin() {
+            if (this.$store.state.user) {
+                this.user = this.$store.state.user;
+                console.log(this.user.name);
+            } else {
+                console.log('User chưa được khởi tạo');
+            }
+        },
+            toggleSubModule(item){
+                item.showSubModule = !item.showSubModule
+            }
+        }
+    }
+
+
 
     // import { ref, onMounted } from 'vue';
-
     // const adminLink = ref(null);
     // const childMenu = ref(null);
     // const mobileMenuToggle = ref(null);
     // const nav = ref(null);
-
     // const menus = ref([]);
     // const items = ref([]);
     // const arrows = ref([]);
     // const selects = ref([]);
-
     // onMounted(() => {
     
     //     if (adminLink.value && childMenu.value) {
@@ -23,8 +61,6 @@
     //             childMenu.value.classList.toggle('active');
     //         });
     //     }
-
-    
     //     menus.value = Array.from(document.querySelectorAll('.nav-bar-list-child.nav-list-child-menu .nav-bar-list-child__content'));
     //     items.value = Array.from(document.querySelectorAll('.nav-bar-list-child__content-box'));
     //     arrows.value = Array.from(document.querySelectorAll('.child__content-icon-extend'));
@@ -65,43 +101,6 @@
     //     }
     // });
 
-    export default {
-        data() {
-            return {
-                navBarData : null ,
-                showSubModule : false ,
-            }
-        }, 
-        mounted(){
-            this.getNavBarData()
-        },
-        methods: {
-            async getNavBarData(){
-                 try {
-
-                    const token = store.state.token
-
-                    // console.log(token);
-                    
-                    await csrf.getCookie()
-                    // const token = localStorage.getItem('token')
-                    const response = await axios.get('http://127.0.0.1:8000/api/dashbroad/getModule',{
-                        headers:{
-                            'Authorization':   `Bearer ${token}`
-                        }
-                    })
-                    console.log(response.data);
-                    this.navBarData = response.data
-                }catch(error){
-                    console.log(error)
-                }               
-            },
-            toggleSubModule(item){
-                item.showSubModule = !item.showSubModule
-            }
-        }
-    }
-
 </script>
 
 
@@ -112,17 +111,16 @@
             <div class="nav-box-admin">
                 <img src="@/assets/backend/img/admin.jpg" alt="" class="nav-box-admin__img">
                 <div class="nav-box-admin__info">
-                    <p class="nav-box-admin__info-name">Đào Văn Thành</p>
+                    <p  class="nav-box-admin__info-name">Đào Văn Thành</p>
                     <div class="nav-box-admin__info-status">
                         <i class="fa-solid fa-wifi admin-icon"></i>
-                        <p class="nav-box-admin__info-status-item">Đang hoạt động</p>
+                        <p style="padding:0 5px ;" class="nav-box-admin__info-status-item">Đang hoạt động</p>
                     </div>
                 </div>
             </div>
 
             <div class="nav-bar">
-                <ul class="nav-bar-list">
-                   
+                <ul class="nav-bar-list"> 
                     <li class="nav-bar-list-child nav-list-child-menu" v-for="item in navBarData" :key="item.name"  >
                         <div class="nav-bar-list-child__content" :class="{'selected' : item.showSubModule}"  @click.prevent = "toggleSubModule(item)">
                             <div class="box-select">
@@ -140,87 +138,8 @@
                                 <router-link :to="sub.route">{{ sub.title }}</router-link>
                             </li>
                         </ul>
-                       
-
                     </li>
 
-                    
-                    <!-- <li class="nav-bar-list-child nav-list-child-menu">
-                        <div class="nav-bar-list-child__content">
-                            <div class="box-select">
-                                <div class="nav-bar-list-child__content-icon">
-                                    <i class="fa-solid fa-list child__content-icon-img"></i>
-                                </div>
-                                <a href="#" class="nav-bar-list-child__content-title">Quản lý menu</a>
-                            </div>
-                            <div class="nav-bar-list-child__icon">
-                                <i class="fa-solid fa-chevron-left child__content-icon-extend"></i>
-                            </div>
-                        </div>
-                        <ul class="nav-bar-list-child__content-box">
-                            <li class="menu-list">
-                                <a href="#">Menu cha</a>
-                            </li>
-                            <li class="menu-list">
-                                <a href="#">Menu con</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    
-                    <li class="nav-bar-list-child nav-list-child-menu">
-                        <div class="nav-bar-list-child__content">
-                            <div class="box-select">
-                                <div class="nav-bar-list-child__content-icon">
-                                    <i class="fa-solid fa-palette child__content-icon-img"></i>
-                                </div>
-                                <a href="#" class="nav-bar-list-child__content-title">Quản lý thuộc tính</a>
-                            </div>
-                            <div class="nav-bar-list-child__icon">
-                                <i class="fa-solid fa-chevron-left child__content-icon-extend"></i>
-                            </div>
-                        </div>
-                        <ul class="nav-bar-list-child__content-box">
-                            <li class="menu-list">
-                                <a href="#">Tất cả thuộc tính</a>
-                            </li>
-                            <li class="menu-list">
-                                <a href="#">Thêm thuộc tính</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-bar-list-child nav-list-child-select">
-                            <div class="nav-bar-list-child__content ">
-                                <div class="nav-bar-list-child__content-icon">
-                                
-                                    <i class="fa-solid fa-cart-shopping child__content-icon-img"></i>
-                                </div>
-                                <a href="" class="nav-bar-list-child__content-title">Quản lý đơn hàng</a>
-                            </div>
-                           
-                    </li>
-                    <li class="nav-bar-list-child nav-list-child-select">
-                            <div class="nav-bar-list-child__content ">
-                                <div class="nav-bar-list-child__content-icon">
-                                
-                                    <i class="fa-solid fa-cart-shopping child__content-icon-img"></i>
-                                </div>
-                                <a href="" class="nav-bar-list-child__content-title">Quản lý Banner</a>
-                            </div>
-                           
-                    </li>
-                    <li class="nav-bar-list-child nav-list-child-select">
-                            <div class="nav-bar-list-child__content ">
-                                <div class="nav-bar-list-child__content-icon">
-                                
-                                    <i class="fa-solid fa-cart-shopping child__content-icon-img"></i>
-                                </div>
-                                <a href="" class="nav-bar-list-child__content-title">Quản lý đánh giá</a>
-                            </div>
-                           
-                    </li> -->
-
-                    
                     <li class="nav-bar-list-child">
                         <div class="nav-bar-list-child__logout">
                             <div class="nav-bar-list-child__content-icon">
@@ -238,17 +157,17 @@
 
 <style scoped>
     .app-navbar{
-    width: 15%;
-    position:fixed;
-    color: var(--text-color);
-    margin: 1% 2% 0% 2%;
-    border-right: 1px solid #dbdbdb;
-    height: 100vh;
-    background-color: #ffffff;
-    border-radius: 10px;
-    animation: faded 2s linear;
-    box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
-
+        z-index: 10;
+        width: 15%;
+        position:fixed;
+        color: var(--text-color);
+        margin: 1% 2% 0% 2%;
+        border-right: 1px solid #dbdbdb;
+        height: 100vh;
+        background-color: #ffffff;
+        border-radius: 10px;
+        animation: faded 2s linear;
+        box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
     }
     @keyframes faded{
         from {
@@ -305,9 +224,6 @@
         transform: rotate(-90deg); 
         transition: transform 0.3s ease; 
     }
-
-
-
     .nav-bar{
         margin-top: 10px;
     }
@@ -321,7 +237,6 @@
         list-style:  none;
         margin-top: 20px;
     }
-
     .nav-bar-list-child__content-box{
        
         width: 100%;
@@ -359,7 +274,6 @@
         justify-content: center;
         text-align: center;
         align-items: center;
-
     }
     .nav-bar-list-child__content-icon{
         padding: 0 10px;
@@ -381,7 +295,6 @@
         align-items: center;
         color: #525151;
     }
-
     .nav-bar-list-child__content-box{
         position: relative;
     }
@@ -391,7 +304,6 @@
         align-items: center;
         margin-top: 5px;
     }
-
     .active{
         display: inline-block ;
     }

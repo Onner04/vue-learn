@@ -1,44 +1,23 @@
-<script >
-import store from '@/store';
-import  Navbar from './Navbar.vue';
-import csrf from '@/config/csrf'
-import axios from 'axios';
+<script setup>
+    import store from '@/store';
+import { onBeforeMount } from 'vue';
+    import  NavBar from './Navbar.vue';
 
-
-    export default {
-        data() {
-            return {
-                token : null ,
-                user : null ,
-            }
-        }, 
-        mounted(){
-            this.setToken()
-        },
-        methods: {
-            async setToken(){
-                const token = store.state.token
-                if(token){
-
-                    try {
-                        await csrf.getCookie()
-                        const response = await axios.get('http://127.0.0.1:8000/api/auth/getAuthCookie')
-                        this.token = response.data                     
-                    }catch(error){
-                       console.log(error)
-                   }               
-                }
-            },
-        }
+    const setToken = () => {
+        const token = localStorage.getItem('token')
+       store.commit('auth/setToken' , token)
+        
     }
+    onBeforeMount(() => {
+        setToken()
+    }) 
+
 </script>
 
 <template>
     <div class="container" id="page-wrapper">
-        <div class="container-color">
-        </div>
-
-        <!-- <Navbar /> -->
+        <div class="container-color"></div>
+         <NavBar /> 
         <slot name="template"> </slot>
     </div>
 </template>
@@ -47,13 +26,15 @@ import axios from 'axios';
    .container{
     display: flex ;
     position: relative;
-    height: 100vh;
-    
+    flex: 1;
+    height: 125vh;
+    max-height: 1280px;
+    background-color: #f3f0f0;
    }
    .container-color{
     position: absolute;
     top: 0;
-    height: 250px;
+    height: 200px;
     background-color:  #fb6340;
     width: 100%;
    }

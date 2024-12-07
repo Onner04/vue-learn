@@ -7,8 +7,8 @@
     import {useStore} from 'vuex'
     import {useRouter} from 'vue-router'
     
-    const email = ref('')
-    const password = ref('')
+    const email = ref('daothanh@gmail.com')
+    const password = ref('12345678')
     const formErrorMessage =ref({}) 
     const emailErrorMessage = ref('')
     const passwordErrorMessage = ref('') 
@@ -16,11 +16,10 @@
 
 
     const handleLogin = async () => {
-       
-
         try {
-            await store.dispatch('login',{email:email.value , password:password.value})    
+            await store.dispatch('auth/login',{email:email.value , password:password.value})    
             router.push({name:'dashboard.index'})
+            
         }  catch (error) {
             
             if(error.response.status == 422){
