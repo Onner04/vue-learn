@@ -1,3 +1,3 @@
-const BACKEND_API = 'http://127.0.0.1:8000/api/'
+const BACKEND_API = 'http://localhost:3000/api/'
 
 export { BACKEND_API }

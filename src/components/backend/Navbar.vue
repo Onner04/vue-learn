@@ -14,7 +14,7 @@
         }, 
         mounted(){
             this.getNavBarData()
-            this.getAdmin()
+           
         },
         
         methods: {
@@ -28,14 +28,7 @@
                     console.log(error)
                 }               
             },
-            async getAdmin() {
-            if (this.$store.state.user) {
-                this.user = this.$store.state.user;
-                console.log(this.user.name);
-            } else {
-                console.log('User chưa được khởi tạo');
-            }
-        },
+            
             toggleSubModule(item){
                 item.showSubModule = !item.showSubModule
             }

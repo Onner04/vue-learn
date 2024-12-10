@@ -1,16 +1,45 @@
 <script setup>
-     import '@/assets/grid.css';
+    import '@/assets/grid.css';
     import '@/assets/base.css';
     import Layout from "@/components/backend/Layout.vue";
     import {ref , onMounted} from 'vue' ;
     import axios from 'axios';
 
-
     const adminLink = ref(null);
     const childMenu = ref(null);
     const admins = ref([]) ;
     const items  = ref([]) ;
+
+    const table = ref({
+        thead: [
+            'STT','Tên sản phẩm' ,'ảnh sản phẩm', 'số lượng', 'giá' , 'giá khuyến mãi' , 'thuộc danh mục' , 'trạng thái' , 'hành động' ],
+        data:[
+            {
+                id: 1,
+                name: "Áo khoác",
+                quantity: 20,
+                price: "20$",
+                sale_price: "15$",
+                category: "Áo",
+                status: "Hiển thị",
+            },  
+        ]
+    })
+
+
+    const renderTable = async () => {
+        try {
+            const response = await axios.get('/admin/product');
+            table.value.data = response.data 
+            console.log(response);
+        } catch (error) { 
+        }
+        
+    }
     onMounted(() => {
+
+        renderTable();
+
         admins.value = Array.from(document.querySelectorAll('.header-right-admin'));
         items.value  = Array.from(document.querySelectorAll('.header-right-admin-list'));
         admins.value.forEach((menu, index) => {
@@ -25,10 +54,6 @@
             });
         });
     });
-
-
-    
-  
 </script>
 
 <template>
@@ -75,34 +100,31 @@
                         </div>
                     </div>
                 </header>
-
                 <div class="container-admin-product">
                     <h2 class="admin-product-title">Quản lý sản phẩm </h2>
                     <div class="admin-product-box">
                         <table class="table">
                             <thead>
                                 <tr class="table-product">
-                                    <th>STT</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Ảnh sản phẩm</th>
-                                    <th>Số lượng</th>
-                                    <th>Giá</th>
-                                    <th>Giá khuyến mãi </th>
-                                    <th>Thuộc danh mục </th>
-                                    <th>Trạng thái</th>
-                                    <th>Hành động </th>
+                                    <th v-for="(title, index) in table.thead" :key="index">{{ title }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td><span class="table-product-name">áo khoác</span></td>
-                                    <td class="table-product-img"><img src="@/assets/backend/img/shop-login.avif" alt="" class="table-product-img-item"></td>
-                                    <td><span class="table-product-quantity">20</span></td>
-                                    <td><span class="table-product-price">20$</span></td>
-                                    <td><span class="table-product-salePrice">15$</span></td>
-                                    <td><span class="table-product-category">áo</span></td>
-                                    <td><span class="label label-success">Hiển thị</span></td>
+                                <tr v-for="(row, index) in table.data" :key="row.id">
+                                    <td>{{ index + 1 }}</td>
+                                    <td><span class="table-product-name">{{ row.name }}</span></td>
+                                    <td class="table-product-img">
+                                        <img src="@/assets/backend/img/shop-login.avif" alt="" class="table-product-img-item">
+                                    </td>
+                                    <td><span class="table-product-quantity">{{ row.quantity }}</span></td>
+                                    <td><span class="table-product-price">{{ row.price || 'N/A' }}</span></td>
+                                    <td><span class="table-product-salePrice">{{ row.sale_price || 'N/A' }}</span></td>
+                                    <td><span class="table-product-category">{{ row.category || 'N/A' }}</span></td>
+                                    <td>
+                                        <span class="label" :class="row.status === 'Hiển thị' ? 'label-success' : 'label-danger'">
+                                            {{ row.status || 'Ẩn' }}
+                                        </span>
+                                    </td>
                                     <td>
                                         <a href="" class="table-product-link product-edit">Sửa</a>
                                         <a href="" class="table-product-link product-delete">Xóa</a>
@@ -113,8 +135,6 @@
                     </div>
                 </div>
             </div>
-
-           
         </template>
     </layout>
 </template>

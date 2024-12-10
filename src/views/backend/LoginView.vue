@@ -34,12 +34,6 @@
         }
     } 
 
-
-
-
-
-
-
         // try {
         //     await csrf.getCookie()
         //     const response = await axios.post(BACKEND_API + 'auth/login',{

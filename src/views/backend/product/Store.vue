@@ -4,37 +4,33 @@
     import Layout from "@/components/backend/Layout.vue";
     import {ref , onMounted} from 'vue' ;
     import axios from 'axios';
-import csrf from '@/config/csrf';
+    import {useStore} from 'vuex'
+    import { BACKEND_API } from '@/config/constant.js'
+    import handleFormError from '@/helpers/helper.js'
+
+    const router = useRouter();
+    const store = useStore();
+    import csrf from '@/config/csrf';
+    import { useRouter } from 'vue-router';
 
     const formData = ref({
         name : '' , 
-        quantity : ''
+        quantity : '',
+        price: '',
+        sale_price:'',
 
     })
     const formErrorMessage = ref({})
     const create = async () => {
         try {
             await csrf.getCookie()
-            const response = await axios.post('http://localhost:3000/api/product/Store',formData.value)
-            
-            
+            const response = await axios.post(BACKEND_API + 'admin/product/Store',formData.value)
+            router.push({name : 'product.home'})
         } catch (error) {
-           if(error.response.status == 422){
-                formErrorMessage.value = {}
-                Object.keys(error.response.data.errors).forEach(key => {
-                    console.log(error.response.data.errors[key][0]);
-                    formErrorMessage.value[key] = error.response.data.errors[key][0]
-                })
-            } else{
-                formErrorMessage.value.message = error.response.data.message
-            }
+            handleFormError(error, formErrorMessage)
             
         }
-    }
- 
-
-
-    
+    }  
   
 </script>
 
@@ -50,13 +46,11 @@ import csrf from '@/config/csrf';
                         <i class="fa-solid fa-chevron-right header-left-icon"></i>
                         <p class="header-left-title">Sản phẩm</p>
                     </div>
-
                     <div class="header-right">
                         <div class="header-right-search">
                             <input type="text" class="header-right-search-input" placeholder="Tìm kiếm ....">
                             <i class="fa-solid fa-magnifying-glass header-right-icon"></i>
                         </div>
-
                         <div class="header-right-admin">
                             <img src="@/assets/backend/img/admin.jpg" alt="" class="header-right-admin-img">
 
@@ -67,11 +61,10 @@ import csrf from '@/config/csrf';
                                         <p class="header-right-admin-list__child-link-item">Thông tin cá nhân </p>
                                     </a>
                                 </li>
-                        
                                 <li class="header-right-admin-list__child">
                                     <a href="#" class="header-right-admin-list__child-link">
                                         <i class="fa-solid fa-right-from-bracket header-right-admin-icon"></i>                        
-                                         <p class="header-right-admin-list__child-link-item">Đăng xuất </p>
+                                        <p class="header-right-admin-list__child-link-item">Đăng xuất </p>
                                     </a>
                                 </li>
                             </ul>
@@ -94,47 +87,56 @@ import csrf from '@/config/csrf';
                                     <div class="body-box-add-select">
                                         <p  class="box-add-select-title">Tên sản phẩm</p>
                                         <input 
-                                        type="text" 
-                                        v-model="formData.name" 
-                                        name="name"  
-                                        placeholder="Nhập tên sản phẩm" 
-                                        class="box-add-select-input">
-                                        <div>
+                                            type="text" 
+                                            v-model="formData.name" 
+                                            name="name"  
+                                            placeholder="Nhập tên sản phẩm" 
+                                            class="box-add-select-input"
+                                        >
                                          <div v-if="formErrorMessage.name" class="form-error" style="color:red ; font-style:italic ;">
                                             {{formErrorMessage.name}}
                                         </div>    
-    
-                                        </div>
                                     </div>
                                     <div class="body-box-add-select">
                                         <p class="box-add-select-title">số lượng sản phẩm</p>
                                         <input 
-                                        type="text" 
-                                        v-model="formData.quantity" 
-                                        name="quantity"  
-                                        placeholder="Nhập số lượng" 
-                                        class="box-add-select-input">
-                                        <div>
+                                            type="text" 
+                                            v-model="formData.quantity" 
+                                            name="quantity"  
+                                            placeholder="Nhập số lượng" 
+                                            class="box-add-select-input"
+                                        >
                                         <div v-if="formErrorMessage.quantity" class="form-error" style="color:red ;font-style:italic ;">
                                             {{formErrorMessage.quantity}}
-                                        </div> 
-                                        </div>
+                                        </div>   
                                     </div>
-                                    <!-- <div class="body-box-add-select">
+                                    <div class="body-box-add-select">
                                         <p  class="box-add-select-title">giá sản phẩm</p>
-                                        <input type="text" value="" name="price"   placeholder="Nhập giá sản phẩm" class="box-add-select-input">
-                                        <div>
-                                          
+                                        <input 
+                                            type="text" 
+                                            v-model="formData.price" 
+                                            name="price"   
+                                            placeholder="Nhập giá sản phẩm" 
+                                            class="box-add-select-input"
+                                        >
+                                        <div v-if="formErrorMessage.price" class="form-error" style="color:red ;font-style:italic ;">
+                                            {{formErrorMessage.price}}
                                         </div>
                                     </div>
                                     <div class="body-box-add-select">
                                         <p  class="box-add-select-title">giá sale</p>
-                                        <input type="text" value="" name="sale_price"   placeholder="Nhập giá sale" class="box-add-select-input">
-                                        <div>
-
+                                        <input 
+                                            type="text" 
+                                            v-model="formData.sale_price" 
+                                            name="sale_price"   
+                                            placeholder="Nhập giá sale" 
+                                            class="box-add-select-input"
+                                        >
+                                        <div v-if="formErrorMessage.sale_price" class="form-error" style="color:red ;font-style:italic ;">
+                                            {{formErrorMessage.sale_price}}
                                         </div>
                                     </div>
-                                    <div class="body-box-add-select">
+                                    <!-- <div class="body-box-add-select">
                                         <label style="font-size:15px ;" for="">Danh mục sản phẩm</label>
                                         <select class="form-control" name="category_id"> 
                                                   
@@ -144,14 +146,11 @@ import csrf from '@/config/csrf';
                                     </div>
                                     <div class="checkbox">
                                         <span>chiều cao : </span>
-                                
-                                        
-                                        <label >
-                                        <input value="" name="attr[]" type="checkbox">
 
+                                        <label >
+                                         <input value="" name="attr[]" type="checkbox">
                                         </label>
-                                        
-                                        
+                  
                                     </div>       
                                     <div class="form-group">
                                         <label for="file-upload">Ảnh sản phẩm</label>
@@ -165,9 +164,7 @@ import csrf from '@/config/csrf';
                                             Chọn ảnh
                                         </label>
                                         <input id="file-upload" type="file" name="file" class="form-control dn @error('image') is-invalid @enderror">
-                                        <div>
-
-                                        </div>
+                                        
 
                                     </div>
                                     <div class="form-group">
