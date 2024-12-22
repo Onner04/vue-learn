@@ -37,6 +37,18 @@ const router = createRouter({
       component: () => import('../views/backend/product/Store.vue'),
       meta: { middleware: [authMiddleware]},
     },
+    {
+      path: '/admin/product/update/:id(\\d+)',
+      name: 'product.update',
+      component: () => import('../views/backend/product/Store.vue'),
+      meta: { middleware: [authMiddleware]},
+    },
+    {
+      path: '/admin/product/delete/:id(\\d+)',
+      name: 'product.delete',
+      component: () => import('../views/backend/product/Delete.vue'),
+      meta: { middleware: [authMiddleware]},
+    },
   ],
 })
 

@@ -103,79 +103,7 @@
         <template #template>
             
             <div class="container-wrapper">
-                <header>
-                    <div class="header-left">
-                        <h2 class="header-left-home">Trang chủ </h2>
-                        <i class="fa-solid fa-chevron-right header-left-icon"></i>
-                        <p class="header-left-title">Admin</p>
-                    </div>
-
-                    <div class="header-right">
-                        <div class="header-right-search">
-                            <input type="text" class="header-right-search-input" placeholder="Tìm kiếm ....">
-                            <i class="fa-solid fa-magnifying-glass header-right-icon"></i>
-                        </div>
-
-                        <div class="header-right-admin">
-                            <img src="@/assets/backend/img/admin.jpg" alt="" class="header-right-admin-img">
-
-                            <ul class="header-right-admin-list">
-                                <li class="header-right-admin-list__child">
-                                    <a href="#" class="header-right-admin-list__child-link">
-                                        <i class="fa-solid fa-user header-right-admin-icon"></i>
-                                        <p class="header-right-admin-list__child-link-item">Thông tin cá nhân </p>
-                                    </a>
-                                </li>
-                        
-                                <li class="header-right-admin-list__child">
-                                    <a href="#" class="header-right-admin-list__child-link">
-                                        <i class="fa-solid fa-right-from-bracket header-right-admin-icon"></i>                        
-                                         <p class="header-right-admin-list__child-link-item">Đăng xuất </p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="header-right-bell">
-                            <i class="fa-solid fa-bell header-right-bell-icon"></i>
-
-                            <ul class="header-right-noti">
-                                <li class="header-right-noti-list  noti-list-title">
-                                    <div class="header-right-noti-list-item">
-                                        <a href="#" class="header-right-noti-list-item-link">
-                                            
-                                            <p class="header-right-noti-customer noti-title-content">Thông báo</p>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="header-right-noti-list">
-                                    <div class="header-right-noti-list-item">
-                                        <a href="#" class="header-right-noti-list-item-link">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                            <p class="header-right-noti-customer">đào thành đã đặt 1 đơn hàng</p>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="header-right-noti-list">
-                                    <div class="header-right-noti-list-item">
-                                        <a href="#" class="header-right-noti-list-item-link">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                            <p class="header-right-noti-customer">đào thành đã đặt 1 đơn hàng</p>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="header-right-noti-list">
-                                    <div class="header-right-noti-list-item">
-                                        <a href="#" class="header-right-noti-list-item-link">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                            <p class="header-right-noti-customer">đào thành đã đặt 1 đơn hàng</p>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </header>
-
+               
                 <div class="container-admin">
                     <div class="container-statis">
                         <div class="grid wide ">
@@ -183,44 +111,68 @@
                                 <div class="col l-3 m-6 c-6  container-statis-info">
                                     <div class="container-statis-box">
                                         <div class="container-statis-box__child">
-                                            <p class="container-statis-box__child-number">25</p>
-                                            <p class="container-statis-box__child-content">truy cập</p>
-                                        </div>
-                                        <div class="container-statis-box__icon">
-                                            <i class="fa-solid fa-cart-shopping container-statis-box__icon-item"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col l-3 m-6 c-6  container-statis-info">
-                                    <div class="container-statis-box">
-                                        <div class="container-statis-box__child">
-                                            <p class="container-statis-box__child-number">45</p>
                                             <p class="container-statis-box__child-content">Lượt xem</p>
+                                            <div class="container-statis-box__child-parameter">
+                                                <p class="container-statis-box__child-number">25</p>
+                                                <span class="container-statis-box__child-compare">
+                                                    <i class="fa-solid fa-arrow-up "> </i> 3.4%
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div class="container-statis-box__icon">
-                                            <i class="fa-solid fa-cart-shopping container-statis-box__icon-item"></i>
+                                        <div class="container-statis-box__icon" style="background-color:red ;">
+                                            <i class="fa-solid fa-eye container-statis-box__icon-item"  style="color:#fff"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col l-3 m-6 c-6  container-statis-info">
+                                    <div class="container-statis-box">
+                                        <div class="container-statis-box__child">      
+                                            <p class="container-statis-box__child-content">Người dùng mới </p>
+                                            <div class="container-statis-box__child-parameter">
+                                                <p class="container-statis-box__child-number">25</p>
+                                                <!-- <span class="container-statis-box__child-compare">
+                                                    <i class="fa-solid fa-arrow-up " > </i> 3.4%
+                                                </span> -->
+                                                <span class="container-statis-box__child-compare-down">
+                                                    <i class="fa-solid fa-arrow-down " > </i> 3.4%
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="container-statis-box__icon" style="background-image: linear-gradient(310deg, #fb6340, #fbb140);">
+                                            <i class="fa-solid fa-user container-statis-box__icon-item" style="color:#fff"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col l-3 m-6 c-6  container-statis-info">
                                     <div class="container-statis-box">
                                         <div class="container-statis-box__child">
-                                            <p class="container-statis-box__child-number">25$</p>
                                             <p class="container-statis-box__child-content">Thu nhập/tháng</p>
+                                            <div class="container-statis-box__child-parameter">
+                                                <p class="container-statis-box__child-number">25</p>
+                                                <span class="container-statis-box__child-compare">
+                                                    <i class="fa-solid fa-arrow-up "> </i> 2.8%
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div class="container-statis-box__icon">
-                                            <i class="fa-solid fa-cart-shopping container-statis-box__icon-item"></i>
+                                        <div class="container-statis-box__icon" style=" background-image: linear-gradient(195deg, #49a3f1 0%, #1A73E8 100%);">
+                                            <i class="fa-solid fa-money-bill container-statis-box__icon-item" style="color:#fff ;"></i>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col l-3 m-6 c-6  container-statis-info">
                                     <div class="container-statis-box">
                                         <div class="container-statis-box__child">
-                                            <p class="container-statis-box__child-number">25</p>
+                                        
                                             <p class="container-statis-box__child-content">Đơn hàng </p>
+                                            <div class="container-statis-box__child-parameter">
+                                                <p class="container-statis-box__child-number">25</p>
+                                                <span class="container-statis-box__child-compare">
+                                                    <i class="fa-solid fa-arrow-up "> </i> 6.1%
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div class="container-statis-box__icon">
-                                            <i class="fa-solid fa-cart-shopping container-statis-box__icon-item"></i>
+                                        <div class="container-statis-box__icon" style="background-image: linear-gradient(310deg, #2dce89, #2dcecc)">
+                                            <i class="fa-solid fa-cart-shopping container-statis-box__icon-item" style="color:#fff"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -231,11 +183,35 @@
                             <h2 class="container-pay-title">Quản lý doanh thu</h2>
                             <div class="container-pay-balance">
                                 <div class="container-pay-balance-box-select">
+                                    <div class="container-pay-card">
+                                        <div class="container-pay-card-cover"></div>
+                                        <div class="container-pay-card-account">
+                                            <span class="container-pay-card-account-content">4572 1122 3697 7852</span>
+                                        </div>
+                                        <div class="container-pay-card-info">
+                                            <div class="container-pay-card-info-user">
+                                                <h3 class="container-pay-card-info-user__item">Card Holder</h3>
+                                                <span class="container-pay-card-info-user__name">DAO THANH</span>
+                                            </div>
+                                            <div class="container-pay-card-info-date">
+                                                <h3 class="container-pay-card-info-date__item">Expries</h3>
+                                                <span class="container-pay-card-info-date__name">12/12</span>
+                                            </div>
+                                            <img src="@/assets/backend/img/mastercard.webp" alt="" class="container-pay-card-info-img">
+                                        </div>
+                                    </div>
                                     
-                                    <h2 class="container-pay-balance-item">Số dư : 250$</h2>
-                                    <div class="container-pay-balance-select">
-                                        <a href="#" class="conatiner-paybalance-select__withdraw">rút tiền</a>
-                                        <a href="#" class="conatiner-paybalance-select__deposit">nạp tiền</a>
+                                    <div class="container-pay-bank">
+                                        <div class="container-pay-bank__icon">
+                                            <i class="fa-solid fa-wallet pay-bank__icon"></i>
+                                        </div>
+                                        <h3 class="container-pay-bank__title">Số dư tài khoản :</h3>
+                                        <span class="container-pay-bank__number">250$</span>
+                                        <div style="border-bottom:1px solid #cccaca ; margin-top:15px"></div>
+                                        <div class="container-pay-bank__select">
+                                            <a href="#" class="container-pay-bank__select-deposit">nạp tiền</a>
+                                            <a href="#" class="container-pay-bank__select-withdraw">nạp tiền</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="container-pay-method">
@@ -381,172 +357,11 @@
         right: 0;
         width: 80%;
     }
-    header{
-        display: flex;
-        justify-content: space-between;
-        margin: 0 3%;
-    }
-    .header-left-icon{
-        line-height: 30px;
-        padding: 0 5px ;
-    }
-    .header-left{
-        display: flex;
-        height: 30px;
-        line-height: 30px;
-        color: #fff;
-        font-size: 1.4rem;
-    }
-    .header-right{
-        display: flex;
-        justify-content: space-between;
-        width: 35%;
-    }
-    .header-right-search{
-        margin: 5px 20px;
-        position: relative;
-    }
-    .header-right-icon{
-        position: absolute;
-        right: 10px;
-        top: 7px;
-        font-size: 1.4rem;
-    }
-    .header-right-search-input{
-        height: 30px;
-        border-radius: 20px;
-        padding: 0 20px;
-        border: none;
-    }
-    .header-right-admin{
-        width: 10%;
-        position: relative;
-    }
-    .header-right-admin-img{
-        width: 80%;
-        border-radius: 50%;
-        margin: 0 5px ;
-    }
-    .header-right-admin-img:hover{
-        cursor: pointer;
-    }
-    .header-right-admin-list{
-        display: none;
-        background-color: #fff;
-        width: 355%;
-        position: absolute;
-        right: -30px;
-        top: 50px;
-        border-radius: 5px;
-        box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
-        animation: faded 1s ease;
-    }
-    .header-right-admin-list__child{
-        list-style: none;
-    }
-    .header-right-admin-list__child:hover{
-        background-color: #eeeded;
-        border-radius: 5px;
-    }
-    .header-right-admin-icon{
-        line-height: 40px;
-        padding: 0 5px;
-        font-size: 1.4rem; 
-    }
-    .header-right-admin-list__child-link{
-        display: flex;
-        justify-content: center;
-        height: 40px;
-        line-height: 40px;
-        text-decoration: none;
-        color: #000;
-    }
-    .header-right-admin-list__child-link-item{
-        font-size: 1.3rem;
-    }
-    @keyframes faded{
-        from{
-            opacity: 0;
-            transform: translateY(25px);
-        }to{
-            opacity: 1;
-            transform: translateY(0px);
-        }
-    }
-    .header-right-bell{
-        margin-top: 6px;
-        width: 10%;
-        margin-right: 20px;
-    }
-    .header-right-bell-icon{
-        font-size: 2.8rem;
-        color: #fff;
-    }
-    .active{
-        display: inline !important;
-    }
-
-    .container-chart{
-        box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-
-    }
-
-
-    .header-right-bell{
-        position: relative;
-    }
-    .header-right-noti{
-        position: absolute;
-        top: 40px;
-        right: 0;
-        width: 650%;
-        background-color: #fff;
-        border-radius: 3px;
-        overflow: hidden;
-        display: none;
-        animation: faded 0.5s linear;
-                box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
-
-    }
-    .noti-list-title{
-        border-bottom: 1px solid #757575;
-        
-    }
-    .noti-list-title:hover{
-        background-color: #fff !important;
-    }
-    .noti-title-content{
-        color: #ec2626;
-        font-weight: 700;
-        font-size: 1.6rem;
-    }
-    .header-right-noti-list{
-        height: 40px ;
-        line-height: 40px;
-        list-style: none;
-    }
-    .header-right-noti-list:hover{
-        background-color: #e0e0e0;
-    }
-    .header-right-noti-list-item-link{
-        display: flex ;
-        align-items: center;
-        font-size: 1.4rem;
-        text-decoration: none;
-        color: #000;
-        padding: 0 10px;
-    }
-    .header-right-noti-customer{
-        padding: 0 5px;
-    }
-    
-
 
 
     /* container  */
     .container-admin{
-        margin-top: 40px;
+        margin-top: 80px;
     }
    
     .container-statis-box{
@@ -561,16 +376,34 @@
         box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
 
     }
+    .container-statis-box__child-parameter{
+        display: flex;
+        
+    }
+    .container-statis-box__child-compare{
+        padding: 25px 0 0 5px ;
+        color: #06a837;
+    }
+    .container-statis-box__child-compare-down{
+        padding: 25px 0 0 5px ;
+        color: #f50b0b;
+    }
     .container-statis-box__child-number{
-        font-size: 3.5rem;
+        font-size: 3rem;
         margin: 15px 0;
         font-weight: 700;
     }
     .container-statis-box__child-content{
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #757575;
+    }
+    .container-statis-box__icon{
+        padding: 10px 10px ;
+        border-radius: 50%;
     }
     .container-statis-box__icon-item{
-        font-size: 3.5rem;
+        font-size: 2rem;
     }
 
     .container-center{
@@ -602,34 +435,100 @@
             transform: translateY(0);
         }
     }
-    .container-pay-balance-item{
-        margin: 10px 5%;
-        height: 20px ;
-        line-height: 30px;
-        font-size: 1.5rem;
+    .container-pay-card{
+        background-image: url(https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/card-visa.jpg);
+        height: 200px;
+        margin: 2% 2%;
+        border-radius: 10px;
+        color: #fff;
+        width: 37%;
+        position: relative;
     }
+    .container-pay-card-cover{
+        position: absolute;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    }
+    .container-pay-card-account{
+        position: absolute;
+        height: 150px;
+        line-height: 150px;
+        margin: 0 20px;
+        z-index: 10;
+    }
+    .container-pay-card-account-content{
+        font-size: 2rem;
+        font-weight: 600;
+        z-index: 10;
+    }
+    .container-pay-card-info{
+        position: absolute;
+        top: 150px;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 20px;
+    }
+    .container-pay-card-info-date{
+        margin-right: 50%;
+    }
+    .container-pay-card-info-img{
+        width: 10%;
+    }
+    
     .container-pay-balance-box-select{
         display: flex;
     }
-    .container-pay-balance-select{
-        margin: 10px 30px ;
-        width: 20%;
+    
+    .container-pay-bank{
+        width: 18%;
+        height: 200px;
+        margin-top: 25px;
+        border-radius: 10px;
+        box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        background-color: #fafafa;
     }
-    .conatiner-paybalance-select__deposit{
+    .container-pay-bank__icon{
+        padding: 10px 10px;
+        background-image: linear-gradient(310deg, #fb6340, #f56036);
+        width: 20%;
+        margin: 20px auto;
+        border-radius: 5px;
+
+    }
+    .pay-bank__icon{
+        color: #fff;
+        font-size: 2.5rem;
+    }
+    .container-pay-bank__title{
+        font-size: 1.5rem;
+        margin: 10px 0;
+    }
+    .container-pay-bank__number{
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+    .container-pay-bank__select{
+        margin-top: 20px;
+    }
+    .container-pay-bank__select-deposit{
         margin: 0 5% ;
         text-decoration: none;
         color: #fff;
         background-color: #0e8f35;
-        padding: 3px 10px;
+        padding: 5px 10px;
         border-radius: 5px;
         font-weight: 600;
         box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
     }
-    .conatiner-paybalance-select__withdraw{ 
+    .container-pay-bank__select-withdraw{ 
         text-decoration: none;
         color: #fff;
         background-color: #fa3d24;
-        padding: 3px 10px;
+        padding: 5px 10px;
         font-weight: 600;
         border-radius: 5px;
         box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
