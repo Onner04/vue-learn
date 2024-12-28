@@ -4,7 +4,6 @@ import authMiddleware from '@/middleware/authMiddleware.js'
 import loginMiddleware from '@/middleware/loginMiddleware'
 
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -25,6 +24,7 @@ const router = createRouter({
       component: () => import('../views/backend/Dashboard.vue'),
       meta: { middleware: [authMiddleware]},
     },
+    // product
     {
       path: '/admin/product',
       name: 'product.home',
@@ -49,6 +49,60 @@ const router = createRouter({
       component: () => import('../views/backend/product/Delete.vue'),
       meta: { middleware: [authMiddleware]},
     },
+
+    // category
+    // {
+    //   path: '/admin/category',
+    //   name: 'category.home',
+    //   component: () => import('../views/backend/category/Home.vue'),
+    //   meta: { middleware: [authMiddleware]},
+    // },
+    // {
+    //   path: '/admin/category/create',
+    //   name: 'category.create',
+    //   component: () => import('../views/backend/category/Store.vue'),
+    //   meta: { middleware: [authMiddleware]},
+    // },
+    // {
+    //   path: '/admin/category/update/:id(\\d+)',
+    //   name: 'category.update',
+    //   component: () => import('../views/backend/category/Store.vue'),
+    //   meta: { middleware: [authMiddleware]},
+    // },
+    // {
+    //   path: '/admin/category/delete/:id(\\d+)',
+    //   name: 'category.delete',
+    //   component: () => import('../views/backend/category/Delete.vue'),
+    //   meta: { middleware: [authMiddleware]},
+    // },
+    
+    // category-child
+    // {
+    //   path: '/admin/category-child',
+    //   name: 'category-child.home',
+    //   component: () => import('../views/backend/category-child/Home.vue'),
+    //   meta: { middleware: [authMiddleware]},
+    // },
+    // {
+    //   path: '/admin/category-child/create',
+    //   name: 'category-child.create',
+    //   component: () => import('../views/backend/category-child/Store.vue'),
+    //   meta: { middleware: [authMiddleware]},
+    // },
+    // {
+    //   path: '/admin/category-child/update/:id(\\d+)',
+    //   name: 'category-child.update',
+    //   component: () => import('../views/backend/category-child/Store.vue'),
+    //   meta: { middleware: [authMiddleware]},
+    // },
+    // {
+    //   path: '/admin/category-child/delete/:id(\\d+)',
+    //   name: 'category-child.delete',
+    //   component: () => import('../views/backend/category-child/Delete.vue'),
+    //   meta: { middleware: [authMiddleware]},
+    // },
+
+
   ],
 })
 

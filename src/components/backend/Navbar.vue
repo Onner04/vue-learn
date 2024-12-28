@@ -102,12 +102,12 @@
     <div id="navbar" class="app-navbar">
         <div class="nav-box">
             <div class="nav-box-admin">
-                <img src="@/assets/backend/img/admin.jpg" alt="" class="nav-box-admin__img">
+                <img src="@/assets/backend/img/admin-shop.png" alt="" class="nav-box-admin__img">
                 <div class="nav-box-admin__info">
-                    <p  class="nav-box-admin__info-name">Đào Văn Thành</p>
+                    <p  class="nav-box-admin__info-name">Admin Web</p>
                     <div class="nav-box-admin__info-status">
                         <i class="fa-solid fa-wifi admin-icon"></i>
-                        <p style="padding:0 5px ;" class="nav-box-admin__info-status-item">Đang hoạt động</p>
+                        <p style="padding:0 5px ;" class="nav-box-admin__info-status-item">Active</p>
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                             <div class="nav-bar-list-child__content-icon">
                                 <i class="fa-solid fa-right-from-bracket child__content-icon-img"></i>
                             </div>
-                            <a href="#" class="nav-bar-list-child__content-title">Đăng xuất</a>
+                            <a href="#" class="nav-bar-list-child__content-title">Log Out</a>
                         </div>
                     </li>
                 </ul>
@@ -274,7 +274,7 @@
         color: #000000;
     }
     .nav-bar-list-child__content-title{
-        padding: 0 12px;
+        padding: 0 5px;
         color: #000000;
         text-decoration: none;
     }

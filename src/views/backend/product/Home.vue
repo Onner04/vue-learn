@@ -2,12 +2,11 @@
     import '@/assets/grid.css';
     import '@/assets/base.css';
     import Layout from "@/components/backend/Layout.vue";
-    import {ref , onMounted} from 'vue' ;
+    import {ref , onMounted , defineProps} from 'vue' ;
     import axios from 'axios';
+    import Pagination from '@/components/backend/Pagination.vue'
 
-    const adminLink = ref(null);
-    const childMenu = ref(null);
-    const admins = ref([]) ;
+    const Tools = ref([]) ;
     const items  = ref([]) ;
 
     const model  = ref('User') ;
@@ -16,32 +15,25 @@
             update:'product/update',
             delete:'product/delete',
         },
-        action : [
-
-        ]
     })
-   
 
     const table = ref({
         thead: [
-            'STT','Tên sản phẩm' ,'ảnh sản phẩm', 'số lượng', 'giá' , 'giá khuyến mãi' , 'thuộc danh mục' , 'trạng thái' , 'hành động' ],
-        data:[
-            {
-                id: 1,
-                name: "",
-                quantity: 20,
-                price: "",
-                sale_price: "",
-                category: "",
-                status: "Hiển thị",
-            },  
-        ]
+           'Name' ,'Image', 'Quantity', 'Price' , 'Sale Price' , 'Category' , 'Status' , 'Action' 
+        ],
+
+        base:[
+            'name','image','quantity','price','sale_price','category','status','action'
+        ],
+        data:[ ]
     })
+    const paginationData = ref('') ;
     const renderTable = async () => {
         try {
             const response = await axios.get('/admin/product');
             table.value.data = response.data ;
-            console.log(response);
+            paginationData.value = response ;
+            
         } catch (error) { 
         }
     }
@@ -49,9 +41,9 @@
 
         renderTable();
 
-        admins.value = Array.from(document.querySelectorAll('.header-right-admin'));
-        items.value  = Array.from(document.querySelectorAll('.header-right-admin-list'));
-        admins.value.forEach((menu, index) => {
+        Tools.value = Array.from(document.querySelectorAll('#tool-manager'));
+        items.value  = Array.from(document.querySelectorAll('.admin-product-manager-tool__list'));
+        Tools.value.forEach((menu, index) => {
             menu.addEventListener('click', () => {
                 items.value.forEach((item, i) => {
                     if (i === index) {
@@ -72,42 +64,53 @@
             <div class="container-wrapper">     
                 
                 <div class="container-admin-product">
-                    <h2 class="admin-product-title">Quản lý sản phẩm </h2>
+                    <div class="admin-product-manager">
+                        <h2 class="admin-product-title">Product Management</h2>
+                        <div class="admin-product-manager-tool" id="tool-manager">
+                            <i class="fa-solid fa-gear tool-active"></i>
+                            <ul class="admin-product-manager-tool__list" >
+                                <li class="admin-product-manager-tool__list-child">
+                                    <i class="fa-solid fa-delete-left tool-icon"></i>
+                                    <div class="text">Delete All</div>
+                                </li>
+                                <li class="admin-product-manager-tool__list-child">
+                                    <i class="fa-solid fa-hand-point-up tool-icon"></i>
+                                    <div class="text">Publish All</div>
+                                </li>
+                                <li class="admin-product-manager-tool__list-child">
+                                    <i class="fa-solid fa-hand-point-up tool-icon"></i>
+                                    <div class="text">UnPublish All</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="admin-product-box">
                         <table class="table">
                             <thead>
                                 <tr class="table-product">
+                                    <th><input type="checkbox" value="" class="btn btn-check"></th>
                                     <th v-for="(title, index) in table.thead" :key="index">{{ title }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(value, index) in table.data" :key="value.id">
-                                    <td>{{ index + 1 }}</td>
-                                    <td><span class="table-product-name">{{ value.name }}</span></td>
-                                    <td class="table-product-img">
-                                        <img src="@/assets/backend/img/shop-login.avif" alt="" class="table-product-img-item">
-                                    </td>
-                                    <td><span class="table-product-quantity">{{ value.quantity }}</span></td>
-                                    <td><span class="table-product-price">{{ value.price || 'N/A' }}</span></td>
-                                    <td><span class="table-product-salePrice">{{ value.sale_price || 'N/A' }}</span></td>
-                                    <td><span class="table-product-category">{{ value.category || 'N/A' }}</span></td>
-                                    <td>
-                                        <span class="label" :class="value.status === 'Hiển thị' ? 'label-success' : 'label-danger'">
-                                            {{ value.status || 'Ẩn' }}
-                                        </span>
-                                    </td>
+                                <tr v-for="(value) in table.data" :key="value.id">
+                                    <td><input type="checkbox" value="" class="input-checkbox"></td>
+                                    <td v-for="(base , indexBase) in table.base" :key="indexBase"><span class="table-product-name">{{ value[base] }}</span></td>
+                                    
                                     <td>
                                         <router-link :to="`${tableConfig.route.update}/${value.id}`">
-                                            <a href="" class="table-product-link product-edit">Sửa</a>
+                                            <a href="" class="table-product-link product-edit">edit</a>
                                         </router-link>
                                         <router-link :to="`${tableConfig.route.delete}/${value.id}`">
-                                            <a href="" class="table-product-link product-delete">Xóa</a>
+                                            <a href="" class="table-product-link product-delete">delete</a>
                                         </router-link>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+
+                    <Pagination :pagination="paginationData"/>
                 </div>
             </div>
         </template>
@@ -141,18 +144,77 @@
 
     /* product */
     .container-admin-product{
-        margin-top: 155px;
+        margin-top: 100px;
+    }
+    .admin-product-manager{
+        display: flex;
+        justify-content: space-between;
+    }
+    .admin-product-manager-tool{
+        width: 5%;
+        position: relative;
+    }
+    .fa-gear{
+        font-size: 1.6rem;
+        animation: rotate 2s infinite;
+    }
+    @keyframes rotate{
+        0%{
+            -webkit-transform: rotate(0);
+            transform: rotate(0);
+        }
+        100%{
+            -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+        }
+    }
+    .admin-product-manager-tool__list{
+        position: absolute;
+        top: 20px;
+        width: 200%;
+        right: 30px;
+        background-color: #fff;
+        box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        padding: 10px 10px ;
+        display: none;
+        animation: tools 0.5s linear;
+    }
+    @keyframes tools{
+        from{
+            transform: translateY(25px);
+            opacity: 0;
+        }
+        to{
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    .active{
+        display: block !important;
     }
     .admin-product-title{
         font-size: 2rem;
     }
     .admin-product-box{
         background-color: #fff;
-        height: 400px;
+        height: 350px;
         box-shadow: 1px 2px 10px 1px rgba(0, 0, 0, 0.1);
         width: 90%;
-        margin: 20px auto;
+        margin: 100px auto 0 auto ;
         border-radius: 5px;
+    }
+    .tool-icon{
+        height: 25px;
+        line-height: 25px;
+        margin: 0 5px;
+    }
+    .admin-product-manager-tool__list-child{
+        display: flex;
+        list-style: none;
+        height: 25px;
+        line-height: 25px;
+        font-size: 1.3rem;
     }
     .table{
         width: 100%;
@@ -179,9 +241,11 @@
     }
     .product-edit{
         color: rgb(31, 45, 245);
+        text-decoration: none;
     }
     .product-delete{
         color: rgb(255, 0, 0);
+        text-decoration: none;
     }
 
 </style>

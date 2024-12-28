@@ -1,39 +1,78 @@
-<script>
-export default {
-    setup() {
+<script setup>
+    import '@/assets/grid.css';
+    import '@/assets/base.css';
+    import Layout from "@/components/backend/Layout.vue";
+    import {ref , onMounted} from 'vue' ;
+    import axios from 'axios';
+
+
+   
+    const admins = ref([]) ;
+    const items  = ref([]) ;
+    const notis = ref([]);
+    const childs = ref([]);
+    onMounted(() => {
+        admins.value = Array.from(document.querySelectorAll('.header-right-admin'));
+        items.value  = Array.from(document.querySelectorAll('.header-right-admin-list'));
+        admins.value.forEach((menu, index) => {
+            menu.addEventListener('click', () => {
+                items.value.forEach((item, i) => {
+                    if (i === index) {
+                        item.classList.toggle('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        notis.value = Array.from(document.querySelectorAll('.header-right-bell'));
+        childs.value  = Array.from(document.querySelectorAll('.header-right-noti'));
+        notis.value.forEach((menu, index) => {
+            menu.addEventListener('click', () => {
+                childs.value.forEach((child, i) => {
+                    if (i === index) {
+                        child.classList.toggle('active');
+                    } else {
+                        child.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+
         
-    },
-}
+    });
 </script>
 <template>
                 <header>
                     <div class="header-left">
-                        <h2 class="header-left-home">Trang chủ </h2>
+                        <h2 class="header-left-home">Home Page </h2>
                         <i class="fa-solid fa-chevron-right header-left-icon"></i>
                         <p class="header-left-title">Admin</p>
                     </div>
 
                     <div class="header-right">
                         <div class="header-right-search">
-                            <input type="text" class="header-right-search-input" placeholder="Tìm kiếm ....">
+                            <input type="text" class="header-right-search-input" placeholder="Search ....">
                             <i class="fa-solid fa-magnifying-glass header-right-icon"></i>
                         </div>
 
                         <div class="header-right-admin">
-                            <img src="@/assets/backend/img/admin.jpg" alt="" class="header-right-admin-img">
+                            <img src="@/assets/backend/img/admin-shop.png" alt="" class="header-right-admin-img">
 
                             <ul class="header-right-admin-list">
                                 <li class="header-right-admin-list__child">
                                     <a href="#" class="header-right-admin-list__child-link">
                                         <i class="fa-solid fa-user header-right-admin-icon"></i>
-                                        <p class="header-right-admin-list__child-link-item">Thông tin cá nhân </p>
+                                        <p class="header-right-admin-list__child-link-item">Personal information </p>
                                     </a>
                                 </li>
                         
                                 <li class="header-right-admin-list__child">
                                     <a href="#" class="header-right-admin-list__child-link">
                                         <i class="fa-solid fa-right-from-bracket header-right-admin-icon"></i>                        
-                                         <p class="header-right-admin-list__child-link-item">Đăng xuất </p>
+                                         <p class="header-right-admin-list__child-link-item">Log out </p>
                                     </a>
                                 </li>
                             </ul>
@@ -46,7 +85,7 @@ export default {
                                     <div class="header-right-noti-list-item">
                                         <a href="#" class="header-right-noti-list-item-link">
                                             
-                                            <p class="header-right-noti-customer noti-title-content">Thông báo</p>
+                                            <p class="header-right-noti-customer noti-title-content">Communique</p>
                                         </a>
                                     </div>
                                 </li>
@@ -54,7 +93,7 @@ export default {
                                     <div class="header-right-noti-list-item">
                                         <a href="#" class="header-right-noti-list-item-link">
                                             <i class="fa-solid fa-cart-shopping"></i>
-                                            <p class="header-right-noti-customer">đào thành đã đặt 1 đơn hàng</p>
+                                            <p class="header-right-noti-customer">đào thành has ordered 1 order</p>
                                         </a>
                                     </div>
                                 </li>
@@ -62,7 +101,7 @@ export default {
                                     <div class="header-right-noti-list-item">
                                         <a href="#" class="header-right-noti-list-item-link">
                                             <i class="fa-solid fa-cart-shopping"></i>
-                                            <p class="header-right-noti-customer">đào thành đã đặt 1 đơn hàng</p>
+                                            <p class="header-right-noti-customer">đào thành has ordered 1 order</p>
                                         </a>
                                     </div>
                                 </li>
@@ -70,7 +109,7 @@ export default {
                                     <div class="header-right-noti-list-item">
                                         <a href="#" class="header-right-noti-list-item-link">
                                             <i class="fa-solid fa-cart-shopping"></i>
-                                            <p class="header-right-noti-customer">đào thành đã đặt 1 đơn hàng</p>
+                                            <p class="header-right-noti-customer">đào thành has ordered 1 order</p>
                                         </a>
                                     </div>
                                 </li>
@@ -159,7 +198,7 @@ export default {
     }
     .header-right-admin-list__child-link{
         display: flex;
-        justify-content: center;
+        
         height: 40px;
         line-height: 40px;
         text-decoration: none;

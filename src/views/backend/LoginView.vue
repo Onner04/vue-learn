@@ -97,20 +97,20 @@
 <template>
     <div class="app">
         <div class="login">
-            <h1 class="login-title">Đăng nhập để quản lý shop</h1>
+            <h1 class="login-title">Login to manage the shop</h1>
             <form @submit.prevent="handleLogin">
 
                 <div class="form-login">
                     <div class="form-login-label">
                         <div class="form-login-label-select">
-                            <p class="form-login-lable-select__title">Tài khoản</p>
+                            <p class="form-login-lable-select__title">Email</p>
                             <input v-model="email" type="email" class="form-login-lable-select__input" placeholder="nhập tài khoản ....">
                             <div v-if="formErrorMessage.email" class="form-error">
                             {{formErrorMessage.email}}
                             </div>
                         </div>
                         <div class="form-login-label-select">
-                            <p class="form-login-lable-select__title">Mật khẩu</p>
+                            <p class="form-login-lable-select__title">Password</p>
                             <input v-model="password" type="password" class="form-login-lable-select__input" placeholder="nhập mật khẩu ....">
                             <div v-if="formErrorMessage.password" class="form-error">
                             {{formErrorMessage.password}}
@@ -118,7 +118,7 @@
                         </div>
                         <div class="form-login-label-helper">
 
-                        <a href="#" class="form-login-label-helper__item">Quên mật khẩu ? </a>
+                        <a href="#" class="form-login-label-helper__item">Forgot password ? </a>
                         </div>
 
                         <div class="form-login-label-other">
@@ -137,7 +137,7 @@
                         </div>
 
                         <div class="form-login-label-btn">
-                            <button class="btn-login">Đăng nhập</button>
+                            <button class="btn-login">Login</button>
                         </div>
 
                     </div>

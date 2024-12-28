@@ -6,44 +6,7 @@
     import axios from 'axios';
 
 
-    const adminLink = ref(null);
-    const childMenu = ref(null);
-    const admins = ref([]) ;
-    const items  = ref([]) ;
-    const notis = ref([]);
-    const childs = ref([]);
-    onMounted(() => {
-        admins.value = Array.from(document.querySelectorAll('.header-right-admin'));
-        items.value  = Array.from(document.querySelectorAll('.header-right-admin-list'));
-        admins.value.forEach((menu, index) => {
-            menu.addEventListener('click', () => {
-                items.value.forEach((item, i) => {
-                    if (i === index) {
-                        item.classList.toggle('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-            });
-        });
-
-        notis.value = Array.from(document.querySelectorAll('.header-right-bell'));
-        childs.value  = Array.from(document.querySelectorAll('.header-right-noti'));
-        notis.value.forEach((menu, index) => {
-            menu.addEventListener('click', () => {
-                childs.value.forEach((child, i) => {
-                    if (i === index) {
-                        child.classList.toggle('active');
-                    } else {
-                        child.classList.remove('active');
-                    }
-                });
-            });
-        });
-
-
-        
-    });
+    
     
     const currentSlide = ref(0); 
     const widthSlide = ref(0); 
@@ -111,7 +74,7 @@
                                 <div class="col l-3 m-6 c-6  container-statis-info">
                                     <div class="container-statis-box">
                                         <div class="container-statis-box__child">
-                                            <p class="container-statis-box__child-content">Lượt xem</p>
+                                            <p class="container-statis-box__child-content">View</p>
                                             <div class="container-statis-box__child-parameter">
                                                 <p class="container-statis-box__child-number">25</p>
                                                 <span class="container-statis-box__child-compare">
@@ -127,7 +90,7 @@
                                 <div class="col l-3 m-6 c-6  container-statis-info">
                                     <div class="container-statis-box">
                                         <div class="container-statis-box__child">      
-                                            <p class="container-statis-box__child-content">Người dùng mới </p>
+                                            <p class="container-statis-box__child-content">New Users </p>
                                             <div class="container-statis-box__child-parameter">
                                                 <p class="container-statis-box__child-number">25</p>
                                                 <!-- <span class="container-statis-box__child-compare">
@@ -146,7 +109,7 @@
                                 <div class="col l-3 m-6 c-6  container-statis-info">
                                     <div class="container-statis-box">
                                         <div class="container-statis-box__child">
-                                            <p class="container-statis-box__child-content">Thu nhập/tháng</p>
+                                            <p class="container-statis-box__child-content">Income/month</p>
                                             <div class="container-statis-box__child-parameter">
                                                 <p class="container-statis-box__child-number">25</p>
                                                 <span class="container-statis-box__child-compare">
@@ -163,7 +126,7 @@
                                     <div class="container-statis-box">
                                         <div class="container-statis-box__child">
                                         
-                                            <p class="container-statis-box__child-content">Đơn hàng </p>
+                                            <p class="container-statis-box__child-content">Order</p>
                                             <div class="container-statis-box__child-parameter">
                                                 <p class="container-statis-box__child-number">25</p>
                                                 <span class="container-statis-box__child-compare">
@@ -180,7 +143,7 @@
                         </div>
 
                         <div class="container-pay">
-                            <h2 class="container-pay-title">Quản lý doanh thu</h2>
+                            <h2 class="container-pay-title">Revenue Management</h2>
                             <div class="container-pay-balance">
                                 <div class="container-pay-balance-box-select">
                                     <div class="container-pay-card">
@@ -205,18 +168,18 @@
                                         <div class="container-pay-bank__icon">
                                             <i class="fa-solid fa-wallet pay-bank__icon"></i>
                                         </div>
-                                        <h3 class="container-pay-bank__title">Số dư tài khoản :</h3>
+                                        <h3 class="container-pay-bank__title">Account balance :</h3>
                                         <span class="container-pay-bank__number">250$</span>
                                         <div style="border-bottom:1px solid #cccaca ; margin-top:15px"></div>
                                         <div class="container-pay-bank__select">
-                                            <a href="#" class="container-pay-bank__select-deposit">nạp tiền</a>
-                                            <a href="#" class="container-pay-bank__select-withdraw">nạp tiền</a>
+                                            <a href="#" class="container-pay-bank__select-deposit">Deposit money</a>
+                                            <a href="#" class="container-pay-bank__select-withdraw">Withdraw money</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="container-pay-method">
-                                    <h2 class="pay-method-name">Tài khoản ngân hàng </h2>
-                                    <a href="" class="pay-method-add"> + Thêm ngân hàng  </a>
+                                    <h2 class="pay-method-name">Bank account</h2>
+                                    <a href="" class="pay-method-add"> + Add new bank  </a>
                                 </div>
                                 <div class="grid wide  pay-box">
                                     <div class="row" style="display : flex ; justify-content:space-between ;">
@@ -246,7 +209,7 @@
                         </div>
                         <div class="container-center">
 
-                            <div class="container-chart" style="padding:-40px 15px ; height : 380px; margin-top:40px ;">
+                            <!-- <div class="container-chart" style="padding:-40px 15px ; height : 380px; margin-top:40px ;">
                                 <svg width="600" height="400">
                                 
                                     <defs>
@@ -299,7 +262,7 @@
                                     <path d="M50,320 C150,180 250,380 350,230 C450,80 550,280 600,100 L600,350 L50,350 " 
                                         fill="url(#gradientGreen)" stroke="#515050" stroke-width="3"/>
                                 </svg>
-                            </div>
+                            </div> -->
 
                             <div class="container-slide-admin">
                                 <div class="slide-admin">
@@ -483,7 +446,7 @@
     }
     
     .container-pay-bank{
-        width: 18%;
+        width: 20%;
         height: 200px;
         margin-top: 25px;
         border-radius: 10px;
@@ -515,7 +478,7 @@
         margin-top: 20px;
     }
     .container-pay-bank__select-deposit{
-        margin: 0 5% ;
+        margin: 0 3% ;
         text-decoration: none;
         color: #fff;
         background-color: #0e8f35;

@@ -39,15 +39,15 @@
 
                 <div class="body-add">
                         <section class="body-add-content">
-                            <h2>Quản lý sản phẩm</h2>
+                            <h2>Product Management</h2>
                         </section>
                         <div class="body-add-box" style="height:700px ; overflow-y: auto; "  >
                             <div class="body-add-box-content">
-                                <h3 class="box-content-title">Thêm mới sản phẩm</h3>
+                                <h3 class="box-content-title">Add new product</h3>
                             </div>
                             <form  @submit.prevent="create">
                                     <div class="body-box-add-select">
-                                        <p  class="box-add-select-title">Tên sản phẩm</p>
+                                        <p  class="box-add-select-title">Product name</p>
                                         <input 
                                             type="text" 
                                             v-model="formData.name" 
@@ -60,7 +60,7 @@
                                         </div>    
                                     </div>
                                     <div class="body-box-add-select">
-                                        <p class="box-add-select-title">số lượng sản phẩm</p>
+                                        <p class="box-add-select-title">Product quantity</p>
                                         <input 
                                             type="text" 
                                             v-model="formData.quantity" 
@@ -73,7 +73,7 @@
                                         </div>   
                                     </div>
                                     <div class="body-box-add-select">
-                                        <p  class="box-add-select-title">giá sản phẩm</p>
+                                        <p  class="box-add-select-title">Product price</p>
                                         <input 
                                             type="text" 
                                             v-model="formData.price" 
@@ -86,7 +86,7 @@
                                         </div>
                                     </div>
                                     <div class="body-box-add-select">
-                                        <p  class="box-add-select-title">giá sale</p>
+                                        <p  class="box-add-select-title">Product sale price</p>
                                         <input 
                                             type="text" 
                                             v-model="formData.sale_price" 
